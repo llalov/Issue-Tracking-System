@@ -12,7 +12,11 @@ angular.module('issueTrackingSystem.home', [
         'authentication',
         function($scope, authentication) {
             $scope.login = function(user) {
-              authentication.loginUser(user);
+              authentication.loginUser(user)
+                .then(function(loggedInUser) {
+                      console.log(loggedInUser);
+                      $location.path('/dashboard');
+                  })
             };
 
             $scope.register = function(user) {
