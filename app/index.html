@@ -6,52 +6,66 @@
         <meta name="description" content="Issue Tracking System">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="styles/bootstrap.min.css">
+        <link rel="stylesheet" href="styles/bootstrap-theme.css">
         <link rel="stylesheet" href="styles/app.css">
     </head>
     <body ng-controller="MainController">
         <div class="navbar navbar-default navbar-fixed-top">
             <div class="container">
-        <div class="navbar-header">
-            <a href="#/" class="navbar-brand">Issue Tracker</a>
-            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="navbar-main">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-        <div class="navbar-collapse collapse" id="navbar-main">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a href="#/" id="themes">Dashboard</a>
-                </li>
-                <li>
-                    <a href="#/" id="download" aria-expanded="false">Projects</a>
-                </li>
-            </ul>
-            <!-- TODO sometimes shows html first. FIX! -->
-            <ul class="nav navbar-nav navbar-right" ng-if="isAuthenticated">
-                <li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">Username</a></li>
-            </ul>
+                <div class="navbar-header">
+                    <a href="#/" class="navbar-brand">Issue Tracker</a>
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="navbar-main">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse" id="navbar-main">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="#/" id="themes">Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="#/" id="download" aria-expanded="false">Projects</a>
+                        </li>
+                    </ul>
+                    <!-- TODO sometimes shows html first. FIX! -->
+                    <ul class="nav navbar-nav navbar-right" ng-if="isAuthenticated">
+                        <li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">Username</a></li>
+                    </ul>
 
-        </div>
-        </div>
+                </div>
+            </div>
         </div>
 
         <div class="container">
             <div ng-view>
-
             </div>
         </div>
 
-        <script src="libs/jquery/jquery-1.12.3.min.js"></script>
-        <script src="styles/bootstrap.min.js"></script>
-        <script src="libs/angular/angular.js"></script    >
-        <script src="libs/angular/angular-route.js"></script>
-        <script src="js/app.js"></script>
-        <script src="js/services/authentication.js"></script>
-        <script src="js/services/identity.js"></script>
-        <script src="js/controllers/HomeController.js"></script>
-        <script src="js/controllers/MainController.js"></script>
 
+        <!-- Including libraries -->
+        <script src="libs/angular/angular.js"></script>
+        <script src="libs/angular/angular-route.js"></script>
+        <script src="libs/angular/angular-resource.js"></script>
+        <script src="libs/jquery/jquery-1.12.3.min.js"></script>
+        <script src="libs/jquery.noty/jquery.noty.js"></script>
+        <script src="libs/bootstrap/bootstrap.min.js"></script>
+        <script src="libs/ui.bootstrap/ui.bootstrap.pagination-0.12.0.js"></script>
+
+        <!-- Including services -->
+        <script src="js/services/authService.js"></script>
+        <script src="js/services/identityService.js"></script>
+        <script src="js/services/notifyService.js"></script>
+        <script src="js/services/userService.js"></script>
+
+        <!-- Including controllers -->
+        <script src="js/controllers/HomeController.js"></script>
+        <script src="js/controllers/AppController.js"></script>
+        <script src="js/controllers/LoginController.js"></script>
+        <script src="js/controllers/RegisterController.js"></script>
+
+        <!-- Including main app file -->
+        <script src="js/app.js"></script>
     </body>
 </html>
