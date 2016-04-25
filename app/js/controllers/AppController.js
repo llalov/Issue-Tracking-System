@@ -1,9 +1,16 @@
-angular.module('issueTrackingSystem.main',[
+angular.module('issueTrackingSystem.app',[
 ]).
-    controller('MainController',[
+    controller('AppController',[
         '$scope',
-        'identity',
-        function($scope, identity){
-            $scope.isAuthenticated = identity.isAuthenticated();
-        }
-    ]);
+        '$location',
+        'authService',
+        'notifyService',
+        function($scope,$location, authService, notifyService) {
+            $scope.authService = authService;
+
+            $scope.logout = function() {
+                authService.logout();
+                notifyService.showInfo('Logout successful');
+                $location.path('/');
+            };
+        }]);

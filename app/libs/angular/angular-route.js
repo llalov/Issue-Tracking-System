@@ -276,7 +276,7 @@ function $RouteProvider() {
      * @property {Object} routes Object with all route configuration Objects as its properties.
      *
      * @description
-     * `$route` is used for deep-linking URLs to controllers and views (HTML partials).
+     * `$route` is used for deep-linking URLs to controllers and views (HTML partial).
      * It watches `$location.url()` and tries to map the path to an existing route definition.
      *
      * Requires the {@link ngRoute `ngRoute`} module to be installed.
