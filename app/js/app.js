@@ -31,18 +31,18 @@
                 $routeProvider.otherwise({redirectTo: '/'});
 
             }
-     ])
+     ]);
      /*.run(function ($rootScope, $location, authService) {
-         $rootScope.$on('$locationChangeStart', function (event) {
-             if($location.path().indexOf("/home") != -1 && !authService.isLoggedIn()) {
-                 $location.path('/');
-             }
-         });
+ $rootScope.$on('$locationChangeStart', function (event) {
+ if($location.path().indexOf("/home") != -1 && !authService.isLoggedIn()) {
+ $location.path('/');
+ }
+ });
 
-         $rootScope.$on('$locationChangeStart', function (event) {
-             if($location.path().indexOf("/") != -1 && authService.isLoggedIn()) {
-                 $location.path('/home');
-             }
-         });
-     });*/
+ $rootScope.$on('$locationChangeStart', function (event) {
+ if($location.path().indexOf("/") != -1 && authService.isLoggedIn()) {
+ $location.path('/home');
+ }
+ });
+ });*/
 

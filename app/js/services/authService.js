@@ -47,10 +47,10 @@ angular.module('issueTrackingSystem.authentication', [])
                     }
                 },
                 isAnonymous : function() {
-                    return sessionStorage['currentUser'] === undefined;
+                    return sessionStorage['currentUser'] == undefined;
                 },
                 isLoggedIn : function() {
-                    return sessionStorage['currentUser'] !== undefined;
+                    return sessionStorage['currentUser'] != undefined;
                 },
                 isNormalUser : function() {
                     var currentUser = this.getCurrentUser();
