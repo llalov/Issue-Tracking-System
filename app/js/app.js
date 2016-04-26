@@ -16,7 +16,7 @@
      .config([
          '$routeProvider',
             function($routeProvider) {
-                $routeProvider.when('/',{
+                $routeProvider.when('/login',{
                     templateUrl: 'templates/login.html',
                     controller: 'LoginController'
                 });
@@ -24,7 +24,7 @@
                     templateUrl: 'templates/register.html',
                     controller: 'RegisterController'
                 });
-                $routeProvider.when('/home',{
+                $routeProvider.when('/',{
                     templateUrl: 'templates/home.html',
                     controller: 'HomeController'
                 });

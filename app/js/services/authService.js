@@ -40,6 +40,7 @@ angular.module('issueTrackingSystem.authentication', [])
                 logout : function() {
                     delete sessionStorage['currentUser'];
                 },
+
                 getCurrentUser : function() {
                     var userObject = sessionStorage['currentUser'];
                     if(userObject != undefined) {
@@ -58,6 +59,7 @@ angular.module('issueTrackingSystem.authentication', [])
                 },
                 isAdmin : function() {
                     var currentUser = this.getCurrentUser();
+
                     return (currentUser != undefined) && (!currentUser.isNormalUser);
                 },
                 getAuthHeaders : function() {

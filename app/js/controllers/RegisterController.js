@@ -11,7 +11,7 @@ angular.module('issueTrackingSystem.registration', [])
                 authService.register(userData,
                     function success(){
                         notifyService.showInfo('Registration successful');
-                        $location.path('/');
+                        $location.path('/dashboard');
                     },
                     function error(err) {
                         notifyService.showError('Registration failed', err);

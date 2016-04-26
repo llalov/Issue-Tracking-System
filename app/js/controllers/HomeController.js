@@ -8,12 +8,9 @@ angular.module('issueTrackingSystem.home', [
         'notifyService',
         function($scope, $location, authService, notifyService) {
 
+            $scope.getIssues = function() {
 
-            $scope.registerUser = function(user) {
-                authService.register(user)
-                    .then(function(registeredUser) {
-                        console.log(registeredUser);
-                    })
-            };
+            }
+
         }
     ]);

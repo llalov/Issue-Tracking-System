@@ -12,7 +12,7 @@ angular.module('issueTrackingSystem.login', [])
                 authService.loginUser(user)
                     .then(function success() {
                         notifyService.showInfo('Login successful');
-                        $location.path('/home');
+                        $location.path('/dashboard');
                     }, function error(err) {
                         notifyService.showError('Login failed', err);
                     });
