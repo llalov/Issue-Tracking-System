@@ -6,8 +6,6 @@
      'ui.bootstrap.pagination',
      'issueTrackingSystem.home',
      'issueTrackingSystem.app',
-     'issueTrackingSystem.registration',
-     'issueTrackingSystem.login',
      'issueTrackingSystem.notification',
      'issueTrackingSystem.authentication'
     ])
@@ -16,14 +14,6 @@
      .config([
          '$routeProvider',
             function($routeProvider) {
-                $routeProvider.when('/login',{
-                    templateUrl: 'templates/login.html',
-                    controller: 'LoginController'
-                });
-                $routeProvider.when('/register',{
-                    templateUrl: 'templates/register.html',
-                    controller: 'RegisterController'
-                });
                 $routeProvider.when('/',{
                     templateUrl: 'templates/home.html',
                     controller: 'HomeController'
@@ -32,17 +22,5 @@
 
             }
      ]);
-     /*.run(function ($rootScope, $location, authService) {
- $rootScope.$on('$locationChangeStart', function (event) {
- if($location.path().indexOf("/home") != -1 && !authService.isLoggedIn()) {
- $location.path('/');
- }
- });
 
- $rootScope.$on('$locationChangeStart', function (event) {
- if($location.path().indexOf("/") != -1 && authService.isLoggedIn()) {
- $location.path('/home');
- }
- });
- });*/
 
