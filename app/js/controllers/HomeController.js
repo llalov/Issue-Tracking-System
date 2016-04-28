@@ -6,7 +6,8 @@ angular.module('issueTrackingSystem.home', [
         '$location',
         'authService',
         'notifyService',
-        function($scope, $location, authService, notifyService) {
+        'dashboardService',
+        function($scope, $location, authService, notifyService, dashboardService) {
             $scope.login = function(user) {
                 authService.loginUser(user)
                     .then(function success() {
@@ -26,9 +27,9 @@ angular.module('issueTrackingSystem.home', [
                         notifyService.showError('Registration failed', err);
                     })
             };
-            $scope.getIssues = function() {
 
-            };
-
+             dashboardService.getMyIssues().then(function(receivedData) {
+                 $scope.myIssues = receivedData;
+             })
         }
     ]);

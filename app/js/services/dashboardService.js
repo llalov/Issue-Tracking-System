@@ -1,4 +1,4 @@
-app.module('issueTrackingSystem.dashboard', [])
+angular.module('issueTrackingSystem.dashboard', [])
     .factory('dashboardService',[
         '$http',
         '$q',
@@ -15,9 +15,7 @@ app.module('issueTrackingSystem.dashboard', [])
                     var request = {
                         method: 'GET',
                         url: BASE_URL + 'issues/me/?orderBy=DueDate desc, IssueKey&pageSize='+ pageSize + '&pageNumber='+ pageNumber,
-                        headers: {
-                            'Authorization': headers
-                        }
+                        headers: headers
                     };
 
                     $http(request).then(function(receivedIssues) {
@@ -25,8 +23,7 @@ app.module('issueTrackingSystem.dashboard', [])
                     }, function (error) {
                         deferred.reject(error.data);
                     });
-
-                    return  deferred.promise();
+                    return  deferred.promise;
                 }
             }
 

@@ -7,7 +7,8 @@
      'issueTrackingSystem.home',
      'issueTrackingSystem.app',
      'issueTrackingSystem.notification',
-     'issueTrackingSystem.authentication'
+     'issueTrackingSystem.authentication',
+     'issueTrackingSystem.dashboard'
     ])
      .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/')
      .constant('pageSize', 5)
