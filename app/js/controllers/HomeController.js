@@ -1,13 +1,14 @@
-angular.module('issueTrackingSystem.home', [
-    'issueTrackingSystem.authentication'
-])
+'use strict';
+
+angular.module('issueTrackingSystem.home', [])
     .controller('HomeController', [
         '$scope',
         '$location',
         'authService',
         'notifyService',
         'dashboardService',
-        function($scope, $location, authService, notifyService, dashboardService) {
+        'issuesService',
+        function($scope, $location, authService, notifyService, dashboardService, issuesService) {
             $scope.login = function(user) {
                 authService.loginUser(user)
                     .then(function success() {
@@ -28,8 +29,15 @@ angular.module('issueTrackingSystem.home', [
                     })
             };
 
-             dashboardService.getMyIssues().then(function(receivedData) {
-                 $scope.myIssues = receivedData;
-             })
+             dashboardService.getMyIssues().then(function(receivedIssues) {
+                 $scope.myIssues = receivedIssues;
+             });
+
+            $scope.getComments = function(id) {
+                issuesService.getIssueComments(id).then(function (receivedComments) {
+                    $scope.issueComments = receivedComments;
+                })
+            };
+
         }
     ]);

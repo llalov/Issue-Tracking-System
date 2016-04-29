@@ -1,4 +1,6 @@
-angular.module('issueTrackingSystem.dashboard', [])
+'use strict';
+
+angular.module('issueTrackingSystem.home.dashboardService', [])
     .factory('dashboardService',[
         '$http',
         '$q',

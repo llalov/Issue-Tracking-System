@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('issueTrackingSystem.authentication', [])
     .factory('authService', [
         '$http',

@@ -30,6 +30,15 @@
 </div>
 
 
-<div class="row" >
+<div class="list-group" ng-repeat="issue in myIssues.Issues ">
+    <div class="list-group">
+        <a href="#" class="list-group-item ">
+            <p class="list-group-item-text pull-right">{{issue.Priority.Name}}</p>
+            <h4 class="list-group-item-heading">{{issue.Title}}</h4>
+            <p class="list-group-item-text">opened by {{issue.Author.Username}}</p>
+        </a>
+    </div>
+</div>
+<div>
     {{myIssues}}
 </div>
