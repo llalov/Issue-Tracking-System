@@ -21,7 +21,7 @@
                     templateUrl: 'templates/home.html',
                     controller: 'HomeController'
                 });
-                $routeProvider.when('/issue/:issueId',{
+                $routeProvider.when('/issues/:id',{
                     templateUrl: 'templates/issue.html',
                     controller: 'IssuesController'
                 });

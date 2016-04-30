@@ -49,6 +49,23 @@ angular.module('issueTrackingSystem.authentication', [])
                         return JSON.parse(sessionStorage['currentUser']);
                     }
                 },
+                getUserInfo: function() {
+                    var deferred = $q.defer(),
+                        headers = this.getAuthHeaders(),
+                        request = {
+                            method: 'GET',
+                            url: BASE_URL + 'users/me',
+                            headers: headers
+                        };
+
+                    $http(request).then(function(receivedUserInfo){
+                        deferred.resolve(receivedUserInfo.data);
+                    }, function(error) {
+                        deferred.reject(error.data);
+                    });
+
+                    return deferred.promise;
+                },
                 isAnonymous : function() {
                     return sessionStorage['currentUser'] == undefined;
                 },
@@ -60,9 +77,16 @@ angular.module('issueTrackingSystem.authentication', [])
                     return (currentUser != undefined) && (!currentUser.isAdmin);
                 },
                 isAdmin : function() {
-                    var currentUser = this.getCurrentUser();
-
-                    return (currentUser != undefined) && (!currentUser.isNormalUser);
+                    var deferred = $q.defer();
+                    this.getUserInfo().then(function(receivedUserInfo) {
+                        if(receivedUserInfo.isAdmin) {
+                            deferred.resolve(receivedUserInfo.isAdmin);
+                        } else {
+                          deferred.reject(receivedUserInfo.isAdmin);
+                        }
+                    });
+                    console.log(deferred.promise);
+                    return deferred.promise;
                 },
                 getAuthHeaders : function() {
                     var headers = {};
