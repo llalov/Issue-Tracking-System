@@ -7,13 +7,21 @@ angular.module('issueTrackingSystem.home', [])
         'authService',
         'notifyService',
         'dashboardService',
-        'issuesService',
         function($scope, $location, authService, notifyService, dashboardService) {
+
+            dashboardService.getMyIssues().then(function(receivedIssues) {
+                $scope.myIssues = receivedIssues;
+                $location.path('/');
+            });
+
             $scope.login = function(user) {
                 authService.loginUser(user)
                     .then(function success() {
                         notifyService.showInfo('Login successful');
-                        $location.path('/');
+                        dashboardService.getMyIssues().then(function(receivedIssues) {
+                            $scope.myIssues = receivedIssues;
+                            $location.path('/');
+                        });
                     }, function error(err) {
                         notifyService.showError('Login failed', err);
                     });
@@ -28,9 +36,5 @@ angular.module('issueTrackingSystem.home', [])
                         notifyService.showError('Registration failed', err);
                     })
             };
-
-            dashboardService.getMyIssues().then(function(receivedIssues) {
-                 $scope.myIssues = receivedIssues;
-             });
         }
     ]);

@@ -25,9 +25,20 @@
                     templateUrl: 'templates/issue.html',
                     controller: 'IssuesController'
                 });
+                $routeProvider.when('/projects',{
+                    templateUrl: 'templates/projects.html',
+                    controller: 'ProjectsController'
+                });
                 $routeProvider.otherwise({redirectTo: '/'});
 
             }
-     ]);
-
-
+     ])
+     .run(function ($rootScope, $location, authService) {
+         $rootScope.$on('$locationChangeStart', function () {
+             if(($location.path().indexOf("/issues") != -1 ||
+                 $location.path().indexOf("/projects") != -1) &&
+                 !authService.isLoggedIn()) {
+                 $location.path('/');
+             }
+         });
+     });

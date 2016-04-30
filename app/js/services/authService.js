@@ -31,7 +31,6 @@ angular.module('issueTrackingSystem.authentication', [])
                         .then(function(response) {
                             deferred.resolve(response.data);
                             sessionStorage['currentUser'] =JSON.stringify(response.data);
-
                         },
                         function(err) {
                             deferred.reject(err.data);
@@ -72,20 +71,16 @@ angular.module('issueTrackingSystem.authentication', [])
                 isLoggedIn : function() {
                     return sessionStorage['currentUser'] != undefined;
                 },
-                isNormalUser : function() {
-                    var currentUser = this.getCurrentUser();
-                    return (currentUser != undefined) && (!currentUser.isAdmin);
-                },
                 isAdmin : function() {
                     var deferred = $q.defer();
                     this.getUserInfo().then(function(receivedUserInfo) {
-                        if(receivedUserInfo.isAdmin) {
+                        if(receivedUserInfo.isAdmin == true) {
                             deferred.resolve(receivedUserInfo.isAdmin);
                         } else {
                           deferred.reject(receivedUserInfo.isAdmin);
                         }
                     });
-                    console.log(deferred.promise);
+
                     return deferred.promise;
                 },
                 getAuthHeaders : function() {

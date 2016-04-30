@@ -5,7 +5,7 @@ angular.module('issueTrackingSystem.app',[
         '$location',
         'authService',
         'notifyService',
-        function($scope,$location, authService, notifyService) {
+        function($scope, $location, authService, notifyService) {
             $scope.authService = authService;
 
             authService.isAdmin().then(function(receivedData) {
