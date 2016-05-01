@@ -4,7 +4,7 @@ angular.module('issueTrackingSystem.projects.projectsService',[])
         '$q',
         'BASE_URL',
         'authService',
-        function($http, $q, $BASE_URL, authService){
+        function($http, $q, BASE_URL, authService){
             return {
                 getAllProjects: function() {
                     var deferred = $q.defer(),
@@ -15,9 +15,9 @@ angular.module('issueTrackingSystem.projects.projectsService',[])
                             headers: headers
                         };
                     $http(request).then(function(receivedProjects){
-                        deferred.resolve(receivedProjects);
+                        deferred.resolve(receivedProjects.data);
                     }, function(error){
-                        deferred.reject(error);
+                        deferred.reject(error.data);
                     });
 
                     return deferred.promise;

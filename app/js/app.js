@@ -31,7 +31,7 @@
                     templateUrl: 'templates/allProjects.html',
                     controller: 'ProjectsController'
                 });
-                $routeProvider.when('/projects/:id',{
+                $routeProvider.when('/project/:id',{
                     templateUrl: 'templates/project.html',
                     controller: 'ProjectsController'
                 });
