@@ -10,7 +10,9 @@
      'issueTrackingSystem.issues',
      'issueTrackingSystem.issues.issuesService',
      'issueTrackingSystem.notification',
-     'issueTrackingSystem.authentication'
+     'issueTrackingSystem.authentication',
+     'issueTrackingSystem.projects',
+     'issueTrackingSystem.projects.projectsService'
     ])
      .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/')
      .constant('pageSize', 5)
@@ -26,7 +28,11 @@
                     controller: 'IssuesController'
                 });
                 $routeProvider.when('/projects',{
-                    templateUrl: 'templates/projects.html',
+                    templateUrl: 'templates/allProjects.html',
+                    controller: 'ProjectsController'
+                });
+                $routeProvider.when('/projects/:id',{
+                    templateUrl: 'templates/project.html',
                     controller: 'ProjectsController'
                 });
                 $routeProvider.otherwise({redirectTo: '/'});

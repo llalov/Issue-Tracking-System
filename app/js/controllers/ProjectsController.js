@@ -1,3 +1,8 @@
-/**
- * Created by Lucho on 5/1/2016.
- */
+angular.module('issueTrackingSystem.projects', [])
+    .controller('ProjectsController',[
+        '$scope',
+        'projectsService',
+        function($scope, $projectsService){
+                
+        }
+    ]);
