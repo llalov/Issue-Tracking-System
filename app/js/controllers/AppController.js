@@ -8,9 +8,11 @@ angular.module('issueTrackingSystem.app',[
         function($scope, $location, authService, notifyService) {
             $scope.authService = authService;
 
-            authService.isAdmin().then(function(receivedData) {
-                $scope.isAdmin = receivedData;
-            });
+            if (authService.isLoggedIn()) {
+                authService.isAdmin().then(function(receivedData) {
+                    $scope.isAdmin = receivedData;
+                });
+            }
 
             $scope.logout = function() {
                 authService.logout();

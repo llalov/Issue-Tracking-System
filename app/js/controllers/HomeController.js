@@ -4,21 +4,21 @@ angular.module('issueTrackingSystem.home', [])
     .controller('HomeController', [
         '$scope',
         '$location',
+        'pageNumber',
         'authService',
         'notifyService',
         'dashboardService',
-        function($scope, $location, authService, notifyService, dashboardService) {
+        function($scope, $location, pageNumber, authService, notifyService, dashboardService) {
 
-            dashboardService.getMyIssues().then(function(receivedIssues) {
-                $scope.myIssues = receivedIssues;
-                $location.path('/');
-            });
+            $scope.issueParams = {
+                pageNumber: pageNumber
+            };
 
             $scope.login = function(user) {
                 authService.loginUser(user)
                     .then(function success() {
                         notifyService.showInfo('Login successful');
-                        dashboardService.getMyIssues().then(function(receivedIssues) {
+                        dashboardService.getMyIssues($scope.issueParams.pageNumber).then(function(receivedIssues) {
                             $scope.myIssues = receivedIssues;
                             $location.path('/');
                         });
@@ -36,5 +36,19 @@ angular.module('issueTrackingSystem.home', [])
                         notifyService.showError('Registration failed', err);
                     })
             };
+
+            if(authService.isLoggedIn()) {
+                dashboardService.getMyIssues($scope.issueParams.pageNumber).then(function(receivedIssues) {
+                    $scope.myIssues = receivedIssues;
+                    $location.path('/');
+                });
+                $scope.reloadIssues = function() {
+                    dashboardService.getMyIssues($scope.issueParams.pageNumber).then(function(receivedIssues){
+                        $scope.myIssues = receivedIssues;
+                    }, function(error) {
+                        notifyService.showError('Cannot load issues', error);
+                    })
+                }
+            }
         }
     ]);

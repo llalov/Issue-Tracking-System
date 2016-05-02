@@ -8,8 +8,10 @@ angular.module('issueTrackingSystem.projects', [])
                 $scope.allProjects = receivedProjects;
             });
 
-            projectsService.getProjectById($routeParams.id).then(function(receivedProject){
-                $scope.projectById = receivedProject;
-            });
+            if($routeParams.id != undefined) {
+                projectsService.getProjectById($routeParams.id).then(function(receivedProject){
+                    $scope.projectById = receivedProject;
+                });
+            }
         }
     ]);

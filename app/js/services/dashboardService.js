@@ -8,11 +8,10 @@ angular.module('issueTrackingSystem.home.dashboardService', [])
         'authService',
         function($http, $q, BASE_URL, authService) {
             return {
-                getMyIssues : function () {
-                    var deferred = $q.defer();
-                    var headers = authService.getAuthHeaders();
-                    var pageNumber = 1;
-                    var pageSize = 5;
+                getMyIssues : function (pageNumber) {
+                    var deferred = $q.defer(),
+                        headers = authService.getAuthHeaders(),
+                        pageSize = 6;
 
                     var request = {
                         method: 'GET',

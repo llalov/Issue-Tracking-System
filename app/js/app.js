@@ -3,19 +3,20 @@
  angular.module('issueTrackingSystem', [
      'ngRoute',
      'ngResource',
+     'angular-loading-bar',
      'ui.bootstrap.pagination',
+     'issueTrackingSystem.notification',
+     'issueTrackingSystem.app',
      'issueTrackingSystem.home',
      'issueTrackingSystem.home.dashboardService',
-     'issueTrackingSystem.app',
      'issueTrackingSystem.issues',
      'issueTrackingSystem.issues.issuesService',
-     'issueTrackingSystem.notification',
      'issueTrackingSystem.authentication',
      'issueTrackingSystem.projects',
      'issueTrackingSystem.projects.projectsService'
     ])
      .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/')
-     .constant('pageSize', 5)
+     .constant('pageNumber', 1)
      .config([
          '$routeProvider',
             function($routeProvider) {

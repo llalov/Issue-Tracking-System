@@ -40,8 +40,12 @@
             </a>
         </div>
     </div>
-    <div>
-        {{myIssues}}
-    </div>
+    <pagination total-items="myIssues.TotalCount" ng-model="issueParams.pageNumber"
+                items-per-page="6" ng-change="reloadIssues()"
+                max-size="9" boundary-links="true">
+    </pagination>
+    <!--<div>-->
+        <!--{{myIssues}}-->
+    <!--</div>-->
 </div>
 
