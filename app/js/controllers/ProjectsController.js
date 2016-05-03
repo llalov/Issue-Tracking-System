@@ -3,8 +3,10 @@ angular.module('issueTrackingSystem.projects', [])
         '$scope',
         '$routeParams',
         'projectsService',
-        function($scope, $routeParams, projectsService){
+        'pageNumber',
+        function($scope, $routeParams, projectsService, pageNumber){
             projectsService.getAllProjects().then(function(receivedProjects){
+                var pageNumber = pageNumber;
                 $scope.allProjects = receivedProjects;
             });
 

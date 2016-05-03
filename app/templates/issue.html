@@ -1,9 +1,19 @@
 <div>
         {{issueById}}
     </div>
-    <h2>COMMENTS</h2>
-    <div ng-repeat="comment in issueComments">
-        <div>
-            {{comment}}
-        </div>
- </div>
+<h4 ng-bind-html-unsafe="issueById">COMMENTS</h4>
+        <ul class="list-group" ng-repeat="comment in issueComments" style="margin-bottom:15px !important">
+            <li class="list-group-item disabled">
+                <div>
+                    <b>{{comment.Author.Username}}</b> commented on {{comment.CreatedOn}}
+                </div>
+                <li class="list-group-item ">
+                    <div>
+                        {{comment.Text}}
+                    </div>
+                </li>
+
+            </li>
+        </ul>
+
+
