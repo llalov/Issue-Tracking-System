@@ -4,11 +4,26 @@ angular.module('issueTrackingSystem.projects', [])
         '$routeParams',
         'projectsService',
         'pageNumber',
-        function($scope, $routeParams, projectsService, pageNumber){
-            projectsService.getAllProjects().then(function(receivedProjects){
-                var pageNumber = pageNumber;
-                $scope.allProjects = receivedProjects;
-            });
+        'authService',
+        function($scope, $routeParams, projectsService, pageNumber, authService){
+            $scope.projectsParams = {
+                pageSize: 6,
+                pageNumber: pageNumber
+            };
+
+            if(authService.isLoggedIn()){
+                projectsService.getAllProjects($scope.projectsParams.pageSize, $scope.projectsParams.pageNumber)
+                    .then(function(receivedProjects){
+                        $scope.allProjects = receivedProjects;
+                    });
+            }
+
+            $scope.reloadProjects = function() {
+                projectsService.getAllProjects($scope.projectsParams.pageSize, $scope.projectsParams.pageNumber)
+                    .then(function(receivedProjects){
+                        $scope.allProjects = receivedProjects;
+                    });
+            };
 
             if($routeParams.id != undefined) {
                 projectsService.getProjectById($routeParams.id).then(function(receivedProject){

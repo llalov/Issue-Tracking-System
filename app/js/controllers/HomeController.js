@@ -11,6 +11,7 @@ angular.module('issueTrackingSystem.home', [])
         function($scope, $location, pageNumber, authService, notifyService, dashboardService) {
 
             $scope.issueParams = {
+                pageSize: 6,
                 pageNumber: pageNumber
             };
 
@@ -18,14 +19,16 @@ angular.module('issueTrackingSystem.home', [])
                 authService.loginUser(user)
                     .then(function success() {
                         notifyService.showInfo('Login successful');
-                        dashboardService.getMyIssues($scope.issueParams.pageNumber).then(function(receivedIssues) {
-                            $scope.myIssues = receivedIssues;
-                            $location.path('/');
+                        dashboardService.getMyIssues($scope.issueParams.pageSize, $scope.issueParams.pageNumber)
+                            .then(function(receivedIssues) {
+                                $scope.myIssues = receivedIssues;
+                                $location.path('/');
                         });
                     }, function error(err) {
                         notifyService.showError('Login failed', err);
                     });
             };
+
             $scope.register = function (userData) {
                 authService.registerUser(userData,
                     function success(){
@@ -38,13 +41,15 @@ angular.module('issueTrackingSystem.home', [])
             };
 
             if(authService.isLoggedIn()) {
-                dashboardService.getMyIssues($scope.issueParams.pageNumber).then(function(receivedIssues) {
-                    $scope.myIssues = receivedIssues;
-                    $location.path('/');
+                dashboardService.getMyIssues( $scope.issueParams.pageSize, $scope.issueParams.pageNumber)
+                    .then(function(receivedIssues) {
+                        $scope.myIssues = receivedIssues;
+                        $location.path('/');
                 });
                 $scope.reloadIssues = function() {
-                    dashboardService.getMyIssues($scope.issueParams.pageNumber).then(function(receivedIssues){
-                        $scope.myIssues = receivedIssues;
+                    dashboardService.getMyIssues($scope.issueParams.pageSize, $scope.issueParams.pageNumber)
+                        .then(function(receivedIssues){
+                            $scope.myIssues = receivedIssues;
                     }, function(error) {
                         notifyService.showError('Cannot load issues', error);
                     })

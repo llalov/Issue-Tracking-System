@@ -1,19 +1,22 @@
 <div>
-        {{issueById}}
-    </div>
+    {{issueById}}
+</div>
 <h4 ng-bind-html-unsafe="issueById">COMMENTS</h4>
-        <ul class="list-group" ng-repeat="comment in issueComments" style="margin-bottom:15px !important">
-            <li class="list-group-item disabled">
-                <div>
-                    <b>{{comment.Author.Username}}</b> commented on {{comment.CreatedOn}}
-                </div>
-                <li class="list-group-item ">
-                    <div>
-                        {{comment.Text}}
-                    </div>
-                </li>
+<ul class="list-group" ng-repeat="comment in issueComments" style="margin-bottom:15px !important">
+    <li class="list-group-item disabled">
+        <div>
+            <b>{{comment.Author.Username}}</b> commented on {{comment.CreatedOn}}
+        </div>
+        <li class="list-group-item ">
+            <div>
+                {{comment.Text}}
+            </div>
+        </li>
 
-            </li>
-        </ul>
-
+    </li>
+</ul>
+<form action="" method="post" name="issueCommentForm">
+    <textarea name="comment" id="issueComment" cols="60" rows="2" placeholder="Add comment..." ng-model="TextCom"></textarea><br/>
+    <button class="btn btn-primary" ng-click="addIssueComment(issueById.Id, TextCom)">Add Comment</button>
+</form>
 

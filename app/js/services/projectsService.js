@@ -6,12 +6,12 @@ angular.module('issueTrackingSystem.projects.projectsService',[])
         'authService',
         function($http, $q, BASE_URL, authService){
             return {
-                getAllProjects: function() {
+                getAllProjects: function(pageSize, pageNumber) {
                     var deferred = $q.defer(),
                         headers = authService.getAuthHeaders(),
                         request = {
                             method: 'GET',
-                            url: BASE_URL + 'projects',
+                            url: BASE_URL + 'projects?filter=&pageSize='+ pageSize +'&pageNumber='+ pageNumber,
                             headers: headers
                         };
                     $http(request).then(function(receivedProjects){

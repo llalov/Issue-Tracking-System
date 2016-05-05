@@ -1,10 +1,7 @@
-<div class="list-group" ng-repeat="project in allProjects">
+<div class="list-group" ng-repeat="project in allProjects.Projects">
     <a href="#/project/{{project.Id}}" class="list-group-item">{{project.Name}}</a>
 </div>
-<div>
-    {{allProjects.length}}
-</div>
-<pagination total-items="allProjects.length" ng-model="pageNumber"
-            items-per-page="10" ng-change="reloadAds()"
+<pagination total-items="allProjects.TotalCount" ng-model="projectsParams.pageNumber"
+            items-per-page="6" ng-change="reloadProjects()"
             max-size="9" boundary-links="true">
 </pagination>
