@@ -8,9 +8,13 @@ angular.module('issueTrackingSystem.home', [])
         'authService',
         'notifyService',
         'dashboardService',
-        function($scope, $location, pageNumber, authService, notifyService, dashboardService) {
-
+        'projectsService',
+        function($scope, $location, pageNumber, authService, notifyService, dashboardService, projectsService) {
             $scope.issueParams = {
+                pageSize: 6,
+                pageNumber: pageNumber
+            };
+            $scope.projectParams = {
                 pageSize: 6,
                 pageNumber: pageNumber
             };
@@ -41,11 +45,31 @@ angular.module('issueTrackingSystem.home', [])
             };
 
             if(authService.isLoggedIn()) {
-                dashboardService.getMyIssues( $scope.issueParams.pageSize, $scope.issueParams.pageNumber)
+                authService.getUserInfo()
+                    .then(function(receivedUserInfo){
+                        $scope.userInfo = receivedUserInfo;
+                        projectsService.getAffiliatedProjects(receivedUserInfo.Id, $scope.projectParams.pageSize, $scope.projectParams.pageNumber)
+                            .then(function(receivedAffiliatedProjects){
+                                $scope.affiliatedProjects = receivedAffiliatedProjects;
+                                $location.path('/');
+                            });
+
+                    });
+
+                dashboardService.getMyIssues($scope.issueParams.pageSize, $scope.issueParams.pageNumber)
                     .then(function(receivedIssues) {
                         $scope.myIssues = receivedIssues;
                         $location.path('/');
                 });
+
+                $scope.reloadAffiliatedProjects = function() {
+                    projectsService.getAffiliatedProjects($scope.userInfo.Id, $scope.projectParams.pageSize, $scope.projectParams.pageNumber)
+                        .then(function(receivedAffiliatedProjects){
+                            $scope.affiliatedProjects = receivedAffiliatedProjects;
+                            $location.path('/');
+                        });
+                };
+
                 $scope.reloadIssues = function() {
                     dashboardService.getMyIssues($scope.issueParams.pageSize, $scope.issueParams.pageNumber)
                         .then(function(receivedIssues){
@@ -53,7 +77,7 @@ angular.module('issueTrackingSystem.home', [])
                     }, function(error) {
                         notifyService.showError('Cannot load issues', error);
                     })
-                }
+                };
             }
         }
     ]);

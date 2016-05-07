@@ -1,4 +1,6 @@
 <div class="row" ng-if="!authService.isLoggedIn()">
+
+    <!--Login Form -->
     <div class="col-md-4 col-md-offset-1 border">
         <form action="" name="loginUserForm">
             <label for="login-email">Email</label>
@@ -11,6 +13,8 @@
         </form>
     </div>
     <div class="col-md-4 col-md-offset-2 border" ng-if="!authService.isLoggedIn()">
+
+        <!--Register Form -->
         <form action="" name="registerUserForm">
             <label for="email">*Email</label>
             <input type="email" id="email" required="required" class="form-control" ng-model="registerUser.email"/>
@@ -29,23 +33,40 @@
     </div>
 </div>
 
-
 <div ng-if="authService.isLoggedIn()">
-    <div class="list-group" ng-repeat="issue in myIssues.Issues ">
-        <div class="list-group">
-            <a href="#/issues/{{issue.Id}}" class="list-group-item ">
-                <p class="list-group-item-text pull-right">{{issue.Priority.Name}}</p>
-                <h4 class="list-group-item-heading">{{issue.Title}}</h4>
-                <p class="list-group-item-text">opened by {{issue.Author.Username}}</p>
-            </a>
+
+    <!--Affiliated Issues -->
+    <div class="col-sm-6 col-md-offset-1 border"><br/>
+        <div class="list-group" ng-repeat="issue in myIssues.Issues ">
+            <div class="list-group">
+                <a href="#/issues/{{issue.Id}}" class="list-group-item ">
+                    <p class="list-group-item-text pull-right">{{issue.Priority.Name}}</p>
+                    <h4 class="list-group-item-heading">{{issue.Title}}</h4>
+                    <p class="list-group-item-text">opened by {{issue.Author.Username}}</p>
+                </a>
+            </div>
         </div>
+        <pagination total-items="myIssues.TotalCount" ng-model="issueParams.pageNumber"
+                    items-per-page="6" ng-change="reloadIssues()"
+                    max-size="9" boundary-links="true">
+        </pagination>
     </div>
-    <pagination total-items="myIssues.TotalCount" ng-model="issueParams.pageNumber"
-                items-per-page="6" ng-change="reloadIssues()"
-                max-size="9" boundary-links="true">
-    </pagination>
-    <!--<div>-->
-        <!--{{myIssues}}-->
-    <!--</div>-->
+
+   <!--Affiliated Projects -->
+    <div class="col-sm-3 col-md-offset-2 border"><br/>
+        <!--{{userInfo}}-->
+        <!--{{affiliatedProjects}}-->
+        <div class="list-group" ng-repeat="project in affiliatedProjects.Projects ">
+            <div class="list-group">
+                <a href="#/project/{{project.Id}}" class="list-group-item ">
+                    <h5 class="list-group-item-heading">{{project.Name}}</h5>
+                </a>
+            </div>
+        </div>
+        <pagination total-items="affiliatedProjects.TotalCount" ng-model="projectParams.pageNumber"
+                    items-per-page="6" ng-change="reloadAffiliatedProjects()"
+                    max-size="4" boundary-links="true">
+        </pagination>
+    </div>
 </div>
 

@@ -38,6 +38,24 @@ angular.module('issueTrackingSystem.projects.projectsService',[])
                     });
 
                     return deferred.promise;
+                },
+
+                getAffiliatedProjects: function(userId, pageSize, pageNumber) {
+                    var deferred = $q.defer(),
+                        headers = authService.getAuthHeaders(),
+                        request = {
+                            method: 'GET',
+                            url: BASE_URL + 'projects?filter=Lead.Id="'+ userId +'"&pageSize='+ pageSize +'&pageNumber='+ pageNumber,
+                            headers: headers
+                        };
+
+                    $http(request).then(function(receivedAffiliatedProjects){
+                        deferred.resolve(receivedAffiliatedProjects.data);
+                    }, function(error){
+                        deferred.reject(error.data);
+                    });
+
+                    return deferred.promise;
                 }
             }
         }
