@@ -45,24 +45,18 @@ angular.module('issueTrackingSystem.issues.issuesService', [])
                     return deferred.promise;
                 },
 
-                addIssueComment: function(issueId, commentText) {
-                    var deferred = $q.defer(),
-                        request = {
-                            method: 'POST',
-                            url: BASE_URL+'issues/'+issueId+'/comments',
-                            headers: authService.getAuthHeaders(),
-                            data: {
-                                Text: commentText
-                            }
-                        };
+                addIssueComment: function(issueId, commentText, success, error) {
+                    var request = {
+                        method: 'POST',
+                        url: BASE_URL+'issues/'+issueId+'/comments',
+                        headers: authService.getAuthHeaders(),
+                        data: {
+                            Text: commentText
+                        }
+                    };
 
-                    $http(request).then(function(success) {
-                        deferred.resolve(success.data);
-                    }, function(error) {
-                        deferred.reject(error.data);
-                    });
+                    $http(request).success(success).error(error);
 
-                    return deferred.promise;
                 }
 
             }

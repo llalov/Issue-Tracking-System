@@ -1,22 +1,44 @@
-<div>
-    {{issueById}}
-</div>
-<h4 ng-bind-html-unsafe="issueById">COMMENTS</h4>
-<ul class="list-group" ng-repeat="comment in issueComments" style="margin-bottom:15px !important">
-    <li class="list-group-item disabled">
-        <div>
-            <b>{{comment.Author.Username}}</b> commented on {{comment.CreatedOn}}
-        </div>
-        <li class="list-group-item ">
-            <div>
-                {{comment.Text}}
-            </div>
-        </li>
 
-    </li>
-</ul>
-<form action="" method="post" name="issueCommentForm">
+<div class="page-header">
+    <h1>{{issueById.Title}}</h1>
+    <h3 ng-if="issueById.Status.Name == 'Open'"><span class="label label-success">{{issueById.Status.Name}}</span><small> <b> {{issueById.Author.Username}}</b> opened this issue</small></h3>
+    <h3 ng-if="issueById.Status.Name == 'Closed'"><span class="label label-danger">{{issueById.Status.Name}}</span><small> <b> {{issueById.Author.Username}}</b> opened this issue</small></h3>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h4><b>Description</b></h4>
+            {{issueById.Description}}<br/><br/>
+            <small><b>Assignee: </b>{{issueById.Assignee.Username}}</small><br/>
+            <small><b>Priority: </b>{{issueById.Priority.Name}}</small><br/>
+            <small><b>Due: </b>{{issueById.DueDate}}</small><br/>
+            <small><b>Project: </b> {{issueById.Project.Name}}</small><br/><br/>
+            <small><b>Labels:</b>
+                <span ng-repeat="label in issueById.Labels">
+                    <span class="label label-default">{{label.Name}}</span>
+                </span>
+            </small>
+        </div>
+    </div>
+    <span></span>
+
+</div>
+<div ng-if="issueComments.length > 0">
+    <ul class="list-group" ng-repeat="comment in issueComments" style="margin-bottom:15px !important">
+        <div class="panel panel-default">
+            <div class="panel-footer">
+                <b>{{comment.Author.Username}}</b> commented on {{comment.CreatedOn}}
+            </div>
+            <div class="panel-body">{{comment.Text}}</div>
+        </div>
+    </ul>
+    <script>
+        var clear = function() {
+            $('#issueComment').val('');
+        }
+    </script>
+</div>
+<form name="issueCommentForm">
     <textarea name="comment" id="issueComment" cols="60" rows="2" placeholder="Add comment..." ng-model="TextCom"></textarea><br/>
-    <button class="btn btn-primary" ng-click="addIssueComment(issueById.Id, TextCom)">Add Comment</button>
+    <button id="addIssueComment" class="btn btn-primary" ng-click="addIssueComment(issueById.Id, TextCom)" onclick="clear()">Add Comment</button>
 </form>
+
 

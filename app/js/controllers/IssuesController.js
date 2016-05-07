@@ -4,9 +4,10 @@ angular.module('issueTrackingSystem.issues', [])
     .controller('IssuesController',[
         '$scope',
         '$routeParams',
+        '$location',
         'issuesService',
         'notifyService',
-        function ($scope, $routeParams, issuesService, notifyService) {
+        function ($scope, $routeParams, $location, issuesService, notifyService) {
 
             issuesService.getIssue($routeParams.id).then(function(receivedIssue) {
                 $scope.issueById = receivedIssue;
@@ -23,7 +24,15 @@ angular.module('issueTrackingSystem.issues', [])
             };
 
             $scope.addIssueComment = function(issueId, commentText) {
-                issuesService.addIssueComment(issueId, commentText);
+                issuesService.addIssueComment(issueId, commentText,
+                    function success(){
+                        notifyService.showInfo('Comment added');
+                        $scope.reloadIssueComments();
+                    },
+                    function error(err){
+                        notifyService.showError('Unsuccessful', err);
+                    }
+                )
             }
         }
     ]);

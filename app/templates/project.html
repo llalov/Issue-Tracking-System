@@ -1,3 +1,23 @@
-<div>
-    {{projectById}}
+<div class="page-header">
+    <h1>{{projectById.Name}}<br/></h1>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h4><b>Description</b></h4>
+            {{projectById.Description}}<br/><br/>
+            <small><b>Lead: </b>{{projectById.Lead.Username}}</small><br/>
+            <small><b>Project Key: </b>{{projectById.ProjectKey}}</small><br/>
+            <small><b>Labels:</b>
+                <span ng-repeat="label in projectById.Labels">
+                        <span class="label label-default">{{label.Name}}</span>
+                </span>
+            </small><br/>
+            <small><b>Priorities:</b>
+                <span ng-repeat="">
+                        <span class="label label-default"></span>
+                </span>
+            </small>
+        </div>
+    </div>
+    <span></span>
+
 </div>

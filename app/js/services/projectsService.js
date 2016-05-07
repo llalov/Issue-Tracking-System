@@ -32,9 +32,9 @@ angular.module('issueTrackingSystem.projects.projectsService',[])
                         };
 
                     $http(request).then(function(receivedProject) {
-                        deferred.resolve(receivedProject);
+                        deferred.resolve(receivedProject.data);
                     }, function(error){
-                        deferred.reject(error);
+                        deferred.reject(error.data);
                     });
 
                     return deferred.promise;
