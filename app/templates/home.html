@@ -34,7 +34,7 @@
 </div>
 
 <div ng-if="authService.isLoggedIn()">
-
+    <!--{{myIssues}}-->
     <!--Affiliated Issues -->
     <div class="col-sm-6 col-md-offset-1 border"><br/>
         <div class="list-group" ng-repeat="issue in myIssues.Issues ">
@@ -47,7 +47,7 @@
             </div>
         </div>
         <pagination total-items="myIssues.TotalCount" ng-model="issueParams.pageNumber"
-                    items-per-page="6" ng-change="reloadIssues()"
+                    items-per-page="6" ng-change="reloadMyIssues()"
                     max-size="9" boundary-links="true">
         </pagination>
     </div>
@@ -55,8 +55,8 @@
    <!--Affiliated Projects -->
     <div class="col-sm-3 col-md-offset-2 border"><br/>
         <!--{{userInfo}}-->
-        <!--{{affiliatedProjects}}-->
-        <div class="list-group" ng-repeat="project in affiliatedProjects.Projects ">
+        <!--{{myProjects}}-->
+        <div class="list-group" ng-repeat="project in affiliatedProjects">
             <div class="list-group">
                 <a href="#/project/{{project.Id}}" class="list-group-item ">
                     <h5 class="list-group-item-heading">{{project.Name}}</h5>
@@ -64,7 +64,7 @@
             </div>
         </div>
         <pagination total-items="affiliatedProjects.TotalCount" ng-model="projectParams.pageNumber"
-                    items-per-page="6" ng-change="reloadAffiliatedProjects()"
+                    items-per-page="6" ng-change="reloadMyProjects()"
                     max-size="4" boundary-links="true">
         </pagination>
     </div>

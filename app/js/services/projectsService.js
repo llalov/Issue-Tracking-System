@@ -40,7 +40,7 @@ angular.module('issueTrackingSystem.projects.projectsService',[])
                     return deferred.promise;
                 },
 
-                getAffiliatedProjects: function(userId, pageSize, pageNumber) {
+                getMyProjects: function(userId, pageSize, pageNumber) {
                     var deferred = $q.defer(),
                         headers = authService.getAuthHeaders(),
                         request = {
@@ -49,14 +49,16 @@ angular.module('issueTrackingSystem.projects.projectsService',[])
                             headers: headers
                         };
 
-                    $http(request).then(function(receivedAffiliatedProjects){
-                        deferred.resolve(receivedAffiliatedProjects.data);
+                    $http(request).then(function(receivedProjects){
+                        deferred.resolve(receivedProjects.data);
                     }, function(error){
                         deferred.reject(error.data);
                     });
 
                     return deferred.promise;
                 }
+
+
             }
         }
     ]);

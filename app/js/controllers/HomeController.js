@@ -19,6 +19,9 @@ angular.module('issueTrackingSystem.home', [])
                 pageNumber: pageNumber
             };
 
+            var affiliatedProjects = [],
+                projectIds = {};
+
             $scope.login = function(user) {
                 authService.loginUser(user)
                     .then(function success() {
@@ -48,9 +51,18 @@ angular.module('issueTrackingSystem.home', [])
                 authService.getUserInfo()
                     .then(function(receivedUserInfo){
                         $scope.userInfo = receivedUserInfo;
-                        projectsService.getAffiliatedProjects(receivedUserInfo.Id, $scope.projectParams.pageSize, $scope.projectParams.pageNumber)
-                            .then(function(receivedAffiliatedProjects){
-                                $scope.affiliatedProjects = receivedAffiliatedProjects;
+                        projectsService.getMyProjects(receivedUserInfo.Id, $scope.projectParams.pageSize, $scope.projectParams.pageNumber)
+                            .then(function(receivedProjects){
+                                var projectsLength = receivedProjects.Projects.length;
+                                for (var i = 0; i < projectsLength; i++) {
+                                    var project = receivedProjects.Projects[i];
+                                    if(!projectIds[project.Id]) {
+                                        affiliatedProjects.push(project);
+                                        projectIds[project.Id] = project.Id;
+                                    }
+                                }
+                                $scope.myProjects = receivedProjects;
+                                $scope.affiliatedProjects = affiliatedProjects;
                                 $location.path('/');
                             });
 
@@ -59,21 +71,47 @@ angular.module('issueTrackingSystem.home', [])
                 dashboardService.getMyIssues($scope.issueParams.pageSize, $scope.issueParams.pageNumber)
                     .then(function(receivedIssues) {
                         $scope.myIssues = receivedIssues;
+                        var issuesLength = receivedIssues.Issues.length;
+                        for(var i = 0; i < issuesLength; i++) {
+                            var issue = receivedIssues.Issues[i];
+                            if(!projectIds[issue.Project.Id]){
+                                affiliatedProjects.push(issue.Project);
+                                projectIds[issue.Project.Id] = issue.Project.Id;
+                            }
+                        }
                         $location.path('/');
                 });
 
-                $scope.reloadAffiliatedProjects = function() {
-                    projectsService.getAffiliatedProjects($scope.userInfo.Id, $scope.projectParams.pageSize, $scope.projectParams.pageNumber)
-                        .then(function(receivedAffiliatedProjects){
-                            $scope.affiliatedProjects = receivedAffiliatedProjects;
+                $scope.reloadMyProjects = function() {
+                    projectsService.getMyProjects($scope.userInfo.Id, $scope.projectParams.pageSize, $scope.projectParams.pageNumber)
+                        .then(function(receivedProjects){
+                            var projectsLength = receivedProjects.Projects.length;
+                            for (var i = 0; i < projectsLength; i++) {
+                                var project = receivedProjects.Projects[i];
+                                if(!projectIds[project.Id]) {
+                                    affiliatedProjects.push(project);
+                                    projectIds[project.Id] = project.Id;
+                                }
+                            }
+
+                            $scope.myProjects = receivedProjects;
+                            $scope.affiliatedProjects = affiliatedProjects;
                             $location.path('/');
                         });
                 };
 
-                $scope.reloadIssues = function() {
+                $scope.reloadMyIssues = function() {
                     dashboardService.getMyIssues($scope.issueParams.pageSize, $scope.issueParams.pageNumber)
                         .then(function(receivedIssues){
                             $scope.myIssues = receivedIssues;
+                            var issuesLength = receivedIssues.Issues.length;
+                            for(var i = 0; i < issuesLength; i++) {
+                                var issue = receivedIssues.Issues[i];
+                                if(!projectIds[issue.Project.Id]){
+                                    affiliatedProjects.push(issue.Project);
+                                    projectIds[issue.Project.Id] = issue.Project.Id;
+                                }
+                            }
                     }, function(error) {
                         notifyService.showError('Cannot load issues', error);
                     })
