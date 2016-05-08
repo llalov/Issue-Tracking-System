@@ -35,21 +35,22 @@
         <label for="issue-due-date">Due Date</label>
         <input type="date" id="issue-due-date" required="required" class="form-control" ng-model="dueDate"/>
         <br/>
-        <label for="issue-project">Project (id remove)</label>
-        <input type="number" id="issue-project" required="required" class="form-control" ng-model="projectId"/>
+        <label for="issue-project">Project (id)</label>
+        <input type="number" id="issue-project" class="form-control" required="required" ng-model="projectId"/>
         <br/>
         <label for="assigneeId">Assignee</label>
-        <select name="assigneeId" id="assigneeId"
+        <select class="form-control" name="assigneeId" id="assigneeId"
                 ng-options="user.Id as user.Username for user in allUsers"
                 ng-model="assigneeId">
         </select>
         <br/>
         <label for="issue-priority">Priority</label>
-        <select name="issue-priority" id="issue-priority"
+        <select class="form-control" name="issue-priority" id="issue-priority"
                 ng-options="priority.Id as priority.Name for priority in issuePriorities"
                 ng-model="priorityId">
         </select>
         <br/>
+
         <label for="issue-labelOne">Label</label>
         <input type="text" id="issue-labelOne" class="form-control" ng-model="labelOne"/>
         <br/>
