@@ -12,12 +12,44 @@
                 </span>
             </small><br/>
             <small><b>Priorities:</b>
-                <span ng-repeat="">
+                <!--<span ng-repeat="">
                         <span class="label label-default"></span>
-                </span>
+                </span>-->
             </small>
         </div>
     </div>
-    <span></span>
+</div>
+<!--
+<div ng-if="">
 
+</div>-->
+<div class="col-md-4 col-md-offset-4 border">
+    <center><h3>Add issue</h3></center>
+    <form action="" name="addIssueForm">
+        <label for="issue-title">Title</label>
+        <input type="text" id="issue-title" required="required" class="form-control" ng-model="title"/>
+        <br/>
+        <label for="issue-description">Description</label>
+        <input type="text" id="issue-description" required="required" class="form-control" ng-model="description"/>
+        <br/>
+        <label for="issue-due-date">Due Date</label>
+        <input type="date" id="issue-due-date" required="required" class="form-control" ng-model="dueDate"/>
+        <br/>
+        <label for="issue-project">Project (id remove)</label>
+        <input type="number" id="issue-project" required="required" class="form-control" ng-model="projectId"/>
+        <br/>
+        <label for="issue-assignee">Assignee (id remove)</label>
+        <input type="text" id="issue-assignee" required="required" class="form-control" ng-model="assigneeId"/>
+        <br/>
+        <label for="issue-priority">Priority (id remove)</label>
+        <input type="number" id="issue-priority" required="required" class="form-control" ng-model="priorityId"/>
+        <br/>
+        <label for="issue-labelOne">Label</label>
+        <input type="text" id="issue-labelOne" class="form-control" ng-model="labelOne"/>
+        <br/>
+        <label for="issue-labelTwo">Label</label>
+        <input type="text" id="issue-labelTwo" class="form-control" ng-model="labelTwo"/>
+        <br/>
+        <button class="btn btn-primary" ng-disabled="addIssueForm.$invalid" ng-click="addIssue(title, description, dueDate, projectId, assigneeId, priorityId, labelOne, labelTwo)">Submit new issue</button>
+    </form>
 </div>

@@ -57,8 +57,6 @@ angular.module('issueTrackingSystem.projects.projectsService',[])
 
                     return deferred.promise;
                 }
-
-
             }
         }
     ]);

@@ -3,6 +3,7 @@
  angular.module('issueTrackingSystem', [
      'ngRoute',
      'ngResource',
+     'issueTrackingSystem.authentication',
      'angular-loading-bar',
      'ui.bootstrap.pagination',
      'issueTrackingSystem.notification',
@@ -11,7 +12,6 @@
      'issueTrackingSystem.home.dashboardService',
      'issueTrackingSystem.issues',
      'issueTrackingSystem.issues.issuesService',
-     'issueTrackingSystem.authentication',
      'issueTrackingSystem.projects',
      'issueTrackingSystem.projects.projectsService'
     ])

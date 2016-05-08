@@ -54,17 +54,20 @@
 
    <!--Affiliated Projects -->
     <div class="col-sm-3 col-md-offset-2 border"><br/>
+           <center><h4>Affiliated Projects</h4></center>
+        <hr/>
         <!--{{userInfo}}-->
         <!--{{myProjects}}-->
-        <div class="list-group" ng-repeat="project in affiliatedProjects">
+        <!--{{affiliatedProjects}}-->
+        <div class="list-group" ng-repeat="project in myProjects.Projects">
             <div class="list-group">
                 <a href="#/project/{{project.Id}}" class="list-group-item ">
                     <h5 class="list-group-item-heading">{{project.Name}}</h5>
                 </a>
             </div>
         </div>
-        <pagination total-items="affiliatedProjects.TotalCount" ng-model="projectParams.pageNumber"
-                    items-per-page="6" ng-change="reloadMyProjects()"
+        <pagination total-items="myProjects.TotalCount" ng-model="projectParams.pageNumber"
+                    items-per-page="projectParams.pageSize" ng-change="reloadMyProjects()"
                     max-size="4" boundary-links="true">
         </pagination>
     </div>

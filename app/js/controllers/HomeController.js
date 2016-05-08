@@ -62,7 +62,7 @@ angular.module('issueTrackingSystem.home', [])
                                     }
                                 }
                                 $scope.myProjects = receivedProjects;
-                                $scope.affiliatedProjects = affiliatedProjects;
+                                $scope.myProjects.Projects = affiliatedProjects
                                 $location.path('/');
                             });
 

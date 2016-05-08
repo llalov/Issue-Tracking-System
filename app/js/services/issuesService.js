@@ -57,6 +57,26 @@ angular.module('issueTrackingSystem.issues.issuesService', [])
 
                     $http(request).success(success).error(error);
 
+                },
+
+                addIssue: function(title, description, dueDate, projectId, assigneeId, priorityId, labelOne, labelTwo, success, error) {
+                    var request = {
+                        method: 'POST',
+                        url: BASE_URL+'issues',
+                        headers: authService.getAuthHeaders(),
+                        data: {
+                            Title: title,
+                            Description: description,
+                            DueDate: dueDate,
+                            ProjectId: projectId,
+                            AssigneeId: assigneeId,
+                            PriorityId: priorityId,
+                            'Labels[0].Name': labelOne,
+                            'Labels[1].Name': labelTwo
+                        }
+                    };
+
+                    $http(request).success(success).error(error);
                 }
 
             }

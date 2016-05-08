@@ -2,10 +2,13 @@ angular.module('issueTrackingSystem.projects', [])
     .controller('ProjectsController',[
         '$scope',
         '$routeParams',
+        '$location',
         'projectsService',
+        'issuesService',
+        'notifyService',
         'pageNumber',
         'authService',
-        function($scope, $routeParams, projectsService, pageNumber, authService){
+        function($scope, $routeParams, $location, projectsService, issuesService, notifyService, pageNumber, authService){
             $scope.projectsParams = {
                 pageSize: 6,
                 pageNumber: pageNumber
@@ -23,6 +26,17 @@ angular.module('issueTrackingSystem.projects', [])
                     .then(function(receivedProjects){
                         $scope.allProjects = receivedProjects;
                     });
+            };
+
+            $scope.addIssue = function(title, description, dueDate, projectId, assigneeId, priorityId, labelOne, labelTwo) {
+                issuesService.addIssue(title, description, dueDate, projectId, assigneeId, priorityId, labelOne, labelTwo,
+                    function success(){
+                        notifyService.showInfo('Issue added');
+                        $location.path('/');
+                    },
+                    function error(err) {
+                        notifyService.showError('Unsuccessful', err);
+                    })
             };
 
             if($routeParams.id != undefined) {
