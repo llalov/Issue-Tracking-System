@@ -11,7 +11,6 @@ angular.module('issueTrackingSystem.issues', [])
 
             issuesService.getIssue($routeParams.id).then(function(receivedIssue) {
                 $scope.issueById = receivedIssue;
-                $scope.issuePriorities = receivedIssue.Priorities;
             });
 
             issuesService.getIssueComments($routeParams.id).then(function (receivedComments) {

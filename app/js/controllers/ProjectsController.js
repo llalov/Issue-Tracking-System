@@ -48,6 +48,7 @@ angular.module('issueTrackingSystem.projects', [])
             if($routeParams.id != undefined) {
                 projectsService.getProjectById($routeParams.id).then(function(receivedProject){
                     $scope.projectById = receivedProject;
+                    $scope.issuePriorities = receivedProject.Priorities;
                 });
             }
         }
