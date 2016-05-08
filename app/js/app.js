@@ -4,6 +4,7 @@
      'ngRoute',
      'ngResource',
      'issueTrackingSystem.authentication',
+     'issueTrackingSystem.users',
      'angular-loading-bar',
      'ui.bootstrap.pagination',
      'issueTrackingSystem.notification',

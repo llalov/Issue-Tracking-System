@@ -38,9 +38,15 @@
         <label for="issue-project">Project (id remove)</label>
         <input type="number" id="issue-project" required="required" class="form-control" ng-model="projectId"/>
         <br/>
-        <label for="issue-assignee">Assignee (id remove)</label>
-        <input type="text" id="issue-assignee" required="required" class="form-control" ng-model="assigneeId"/>
+        <label for="assigneeId">Assignee</label>
+        <select name="assigneeId" id="assigneeId"
+                ng-options="user.Id as user.Username for user in allUsers track by user.Id"
+                ng-model="issueData.AssigneeId">
+        </select>
         <br/>
+        <!--<label for="issue-assignee">Assignee (id remove)</label>
+        <input type="text" id="issue-assignee" required="required" class="form-control" ng-model="assigneeId"/>
+        <br/>-->
         <label for="issue-priority">Priority (id remove)</label>
         <input type="number" id="issue-priority" required="required" class="form-control" ng-model="priorityId"/>
         <br/>
