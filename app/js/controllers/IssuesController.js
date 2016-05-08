@@ -11,6 +11,7 @@ angular.module('issueTrackingSystem.issues', [])
 
             issuesService.getIssue($routeParams.id).then(function(receivedIssue) {
                 $scope.issueById = receivedIssue;
+                $scope.issuePriorities = receivedIssue.Priorities;
             });
 
             issuesService.getIssueComments($routeParams.id).then(function (receivedComments) {
@@ -24,6 +25,7 @@ angular.module('issueTrackingSystem.issues', [])
             };
 
             $scope.addIssueComment = function(issueId, commentText) {
+                $scope.TextCom = '';
                 issuesService.addIssueComment(issueId, commentText,
                     function success(){
                         notifyService.showInfo('Comment added');
