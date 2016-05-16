@@ -43,6 +43,10 @@ angular.module('issueTrackingSystem.projects', [])
                     $scope.allUsers = receivedUsers;
                 });
 
+                authService.getUserInfo().then(function(receivedInfo){
+                    $scope.userInfo = receivedInfo;
+                });
+
             }
 
             if($routeParams.id != undefined) {
